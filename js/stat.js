@@ -9,8 +9,8 @@ var INNER_GAP_Y = 25;
 var INNER_GAP_X = 40;
 var LINE_HEIGHT = 18;
 
-var BAR_HEIGHT = 150;
-var BAR_GAP = 50;
+var GRAPH_HEIGHT = 150;
+var GRAPH_GAP = 50;
 
 var COLUMN_WIDTH = 40;
 
@@ -65,9 +65,9 @@ window.renderStatistics = function (ctx, players, times) {
       ctx.fillStyle = USER_COLOR;
     }
 
-    var columnHeight = (BAR_HEIGHT * times[i]) / maxTime;
-    var columnGap = COLUMN_WIDTH + BAR_GAP;
-    var columnY = CLOUD_Y + INNER_GAP_Y + LINE_HEIGHT * 3 + (BAR_HEIGHT - columnHeight);
+    var columnHeight = (GRAPH_HEIGHT * times[i]) / maxTime;
+    var columnGap = COLUMN_WIDTH + GRAPH_GAP;
+    var columnY = CLOUD_Y + INNER_GAP_Y + LINE_HEIGHT * 3 + (GRAPH_HEIGHT - columnHeight);
     var columnX = CLOUD_X + INNER_GAP_X + columnGap * i;
 
     renderColumn(ctx, columnX, columnY, COLUMN_WIDTH, columnHeight, players[i], times[i]);
