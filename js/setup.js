@@ -118,24 +118,23 @@ var onDialogEscPress = function (evt) {
 };
 var openDialog = function () {
   userDialog.classList.remove('hidden');
-  document.addEventListener('keydown', onDialogEscPress);
+  document.addEventListener('keyDown', onDialogEscPress);
 };
 var closeDialog = function () {
   userDialog.classList.add('hidden');
-  document.addEventListener('keydown', onDialogEscPress);
+  document.addEventListener('keyDown', onDialogEscPress);
 };
 
 
 // Обработчики событий для открывания окна
 userDialogOpen.addEventListener('click', openDialog);
-userDialogOpen.addEventListener('keydown', function (evt) {
+userDialogOpen.addEventListener('keyDown', function (evt) {
   if (evt.keyCode === ENTER_CODE) {
     openDialog();
   }
-
 });
 userDialogClose.addEventListener('click', closeDialog);
-userDialogClose.addEventListener('keydown', function (evt) {
+userDialogClose.addEventListener('keyDown', function (evt) {
   if (evt.keyCode === ENTER_CODE) {
     closeDialog();
   }
@@ -170,7 +169,3 @@ wizardFireball.addEventListener('click', function () {
   wizardFireball.style.backgroundColor = newColor;
   wizardFireballInput.value = newColor;
 });
-
-
-
-
