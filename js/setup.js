@@ -118,23 +118,23 @@ var onDialogEscPress = function (evt) {
 };
 var openDialog = function () {
   userDialog.classList.remove('hidden');
-  document.addEventListener('keyDown', onDialogEscPress);
+  document.addEventListener('keydown', onDialogEscPress);
 };
 var closeDialog = function () {
   userDialog.classList.add('hidden');
-  document.addEventListener('keyDown', onDialogEscPress);
+  document.addEventListener('keydown', onDialogEscPress);
 };
 
 
 // Обработчики событий для открывания окна
 userDialogOpen.addEventListener('click', openDialog);
-userDialogOpen.addEventListener('keyDown', function (evt) {
+userDialogOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_CODE) {
     openDialog();
   }
 });
 userDialogClose.addEventListener('click', closeDialog);
-userDialogClose.addEventListener('keyDown', function (evt) {
+userDialogClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_CODE) {
     closeDialog();
   }
