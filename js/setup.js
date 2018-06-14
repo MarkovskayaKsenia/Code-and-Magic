@@ -46,6 +46,25 @@ var fireballColors = [
 
 var NUMBER_OF_WIZARDS = 4;
 
+// Получаем цвета фаерболов в RGB
+var hexToRgb = function (hexString) {
+  var hex = hexString.substr(1);
+  var bigint = parseInt(hex, 16);
+  var r = (bigint >> 16) & 255;
+  var g = (bigint >> 8) & 255;
+  var b = bigint & 255;
+
+  return 'rgb(' + r + ', ' + g + ', ' + b + ')';
+};
+var getArrayHexToRgb = function (arr) {
+  var newArr = [];
+  for (var i = 0; i < arr.length; i++) {
+    newArr[i] = hexToRgb(arr[i]);
+  }
+  return newArr;
+};
+var rgbFireballColors = getArrayHexToRgb(fireballColors);
+
 // Функция для вывода случайного элемента массива
 var getRandomFromArray = function (arr) {
   return arr[Math.floor(Math.random() * arr.length)];
@@ -174,10 +193,10 @@ wizardEyes.addEventListener('click', function () {
 var wizardFireball = player.querySelector('.setup-fireball-wrap');
 var wizardFireballInput = player.querySelector('input[name=fireball-color]');
 wizardFireball.addEventListener('click', function () {
-  var newColor = getRandomFromArray(fireballColors);
+  var newColor = getRandomFromArray(rgbFireballColors);
   while (newColor === wizardFireball.style.backgroundColor) {
-    newColor = getRandomFromArray(fireballColors);
+    newColor = getRandomFromArray(rgbFireballColors);
   }
-  wizardFireball.style.backgroundColor = newColor;
+  wizardFireball.style.background = newColor;
   wizardFireballInput.value = newColor;
 });
