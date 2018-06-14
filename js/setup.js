@@ -1,7 +1,7 @@
 'use strict';
 
 // Параметры волшебников
-var FIRST_NAMES = [
+var firstNames = [
   'Иван',
   'Хуан Себастьян',
   'Мария',
@@ -11,7 +11,7 @@ var FIRST_NAMES = [
   'Люпита',
   'Вашингтон'
 ];
-var SECOND_NAMES = [
+var secondNames = [
   'да Марья',
   'Верон',
   'Мирабелла',
@@ -21,7 +21,7 @@ var SECOND_NAMES = [
   'Нионго',
   'Ирвинг'
 ];
-var COAT_COLORS = [
+var coatColors = [
   'rgb(101, 137, 164)',
   'rgb(241, 43, 107)',
   'rgb(146, 100, 161)',
@@ -29,20 +29,21 @@ var COAT_COLORS = [
   'rgb(215, 210, 55)',
   'rgb(0, 0, 0)'
 ];
-var EYES_COLORS = [
+var eyesColors = [
   'black',
   'red',
   'blue',
   'yellow',
   'green'
 ];
-var FIREBALL_COLORS = [
+var fireballColors = [
   '#ee4830',
   '#30a8ee',
   '#5ce6c0',
   '#e848d5',
   '#e6e848'
 ];
+
 var NUMBER_OF_WIZARDS = 4;
 
 // Функция для вывода случайного элемента массива
@@ -65,7 +66,7 @@ var getWizards = function (wizardFirstNames, wizardSecondNames, wizardCoatColors
 };
 
 // Генерируем массив волшебников
-var similarWizards = getWizards(FIRST_NAMES, SECOND_NAMES, COAT_COLORS, EYES_COLORS, NUMBER_OF_WIZARDS);
+var similarWizards = getWizards(firstNames, secondNames, coatColors, eyesColors, NUMBER_OF_WIZARDS);
 
 // Функция отрисовки волшебников
 var renderWizard = function (wizard) {
@@ -109,11 +110,13 @@ var ENTER_CODE = 13;
 
 // Методы открытия и закрытия окна
 var onDialogEscPress = function (evt) {
-  if (evt.target === userNameInput) {
-    userNameInput.blur();
-    evt.stopPropagation();
-  } else if (evt.keyCode === ESC_CODE) {
-    closeDialog();
+  if (evt.keyCode === ESC_CODE) {
+    if (evt.target === userNameInput) {
+      userNameInput.blur();
+      evt.stopPropagation();
+    } else {
+      closeDialog();
+    }
   }
 };
 var openDialog = function () {
@@ -147,7 +150,10 @@ var player = document.querySelector('.setup-player');
 var wizardCoat = player.querySelector('.wizard-coat');
 var wizardCoatInput = player.querySelector('input[name=coat-color]');
 wizardCoat.addEventListener('click', function () {
-  var newColor = getRandomFromArray(COAT_COLORS);
+  var newColor = getRandomFromArray(coatColors);
+  while (newColor === wizardCoat.style.fill) {
+    newColor = getRandomFromArray(coatColors);
+  }
   wizardCoat.style.fill = newColor;
   wizardCoatInput.value = newColor;
 });
@@ -156,7 +162,10 @@ wizardCoat.addEventListener('click', function () {
 var wizardEyes = player.querySelector('.wizard-eyes');
 var wizardEyesInput = player.querySelector('input[name=eyes-color]');
 wizardEyes.addEventListener('click', function () {
-  var newColor = getRandomFromArray(EYES_COLORS);
+  var newColor = getRandomFromArray(eyesColors);
+  while (newColor === wizardEyes.style.fill) {
+    newColor = getRandomFromArray(eyesColors);
+  }
   wizardEyes.style.fill = newColor;
   wizardEyesInput.value = newColor;
 });
@@ -165,7 +174,10 @@ wizardEyes.addEventListener('click', function () {
 var wizardFireball = player.querySelector('.setup-fireball-wrap');
 var wizardFireballInput = player.querySelector('input[name=fireball-color]');
 wizardFireball.addEventListener('click', function () {
-  var newColor = getRandomFromArray(FIREBALL_COLORS);
+  var newColor = getRandomFromArray(fireballColors);
+  while (newColor === wizardFireball.style.backgroundColor) {
+    newColor = getRandomFromArray(fireballColors);
+  }
   wizardFireball.style.backgroundColor = newColor;
   wizardFireballInput.value = newColor;
 });
