@@ -110,50 +110,6 @@ similarWizardList.appendChild(fragment);
 var similarWizardsWindow = document.querySelector('.setup-similar');
 similarWizardsWindow.classList.remove('hidden');
 
-
-// Находим блок, который надо показать, кнопку открытия, кнопку закрытия
-var userDialog = document.querySelector('.setup');
-var userDialogOpen = document.querySelector('.setup-open-icon');
-var userDialogClose = document.querySelector('.setup-close');
-var userNameInput = document.querySelector('.setup-user-name');
-var ESC_CODE = 27;
-var ENTER_CODE = 13;
-
-// Методы открытия и закрытия окна
-var onDialogEscPress = function (evt) {
-  if (evt.keyCode === ESC_CODE) {
-    if (evt.target === userNameInput) {
-      userNameInput.blur();
-      evt.stopPropagation();
-    } else {
-      closeDialog();
-    }
-  }
-};
-var openDialog = function () {
-  userDialog.classList.remove('hidden');
-  document.addEventListener('keydown', onDialogEscPress);
-};
-var closeDialog = function () {
-  userDialog.classList.add('hidden');
-  document.addEventListener('keydown', onDialogEscPress);
-};
-
-
-// Обработчики событий для открывания окна
-userDialogOpen.addEventListener('click', openDialog);
-userDialogOpen.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_CODE) {
-    openDialog();
-  }
-});
-userDialogClose.addEventListener('click', closeDialog);
-userDialogClose.addEventListener('keydown', function (evt) {
-  if (evt.keyCode === ENTER_CODE) {
-    closeDialog();
-  }
-});
-
 // Находим блок персонажа
 var player = document.querySelector('.setup-player');
 
