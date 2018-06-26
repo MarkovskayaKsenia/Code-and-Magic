@@ -16,6 +16,16 @@
     // Функция для вывода случайного элемента массива
     getRandomFromArray: function (arr) {
       return arr[Math.floor(Math.random() * arr.length)];
+    },
+
+    onError: function (error) {
+      var errorWindow = document.querySelector('.error-window');
+      var errorText = document.querySelector('.error-message');
+      errorText.textContent = error;
+      errorWindow.classList.remove('hidden');
+      setTimeout(function () {
+        errorWindow.classList.add('hidden');
+      }, 4000);
     }
   };
 })();
