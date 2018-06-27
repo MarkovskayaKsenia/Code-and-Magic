@@ -18,7 +18,7 @@
         userNameInput.blur();
         evt.stopPropagation();
       } else {
-        closeDialog();
+        window.closeDialog();
       }
     }
   };
@@ -31,7 +31,7 @@
     resetDialogCoords();
     document.addEventListener('keydown', onDialogEscPress);
   };
-  var closeDialog = function () {
+  window.closeDialog = function () {
     userDialog.classList.add('hidden');
     document.addEventListener('keydown', onDialogEscPress);
   };
@@ -43,10 +43,10 @@
       openDialog();
     }
   });
-  userDialogClose.addEventListener('click', closeDialog);
+  userDialogClose.addEventListener('click', window.closeDialog);
   userDialogClose.addEventListener('keydown', function (evt) {
     if (evt.keyCode === ENTER_CODE) {
-      closeDialog();
+      window.closeDialog();
     }
   });
 

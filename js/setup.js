@@ -3,7 +3,7 @@
 (function () {
   // Параметры волшебников
   window.setup = {
-    coatColors: [
+    colorCoat: [
       'rgb(101, 137, 164)',
       'rgb(241, 43, 107)',
       'rgb(146, 100, 161)',
@@ -11,14 +11,14 @@
       'rgb(215, 210, 55)',
       'rgb(0, 0, 0)'
     ],
-    eyesColors: [
+    colorEyes: [
       'black',
       'red',
       'blue',
       'yellow',
       'green'
     ],
-    fireballColors: [
+    colorFireball: [
       '#ee4830',
       '#30a8ee',
       '#5ce6c0',
