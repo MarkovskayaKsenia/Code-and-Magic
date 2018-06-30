@@ -29,6 +29,7 @@
   var openDialog = function () {
     userDialog.classList.remove('hidden');
     resetDialogCoords();
+    window.backend.load(window.onSuccess, window.utils.onError);
     document.addEventListener('keydown', onDialogEscPress);
   };
   window.closeDialog = function () {

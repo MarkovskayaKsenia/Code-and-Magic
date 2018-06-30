@@ -56,10 +56,8 @@
     }
   };
 
-  var onSuccess = function (data) {
+  window.onSuccess = function (data) {
     wizards = data;
     window.render(wizards);
   };
-
-  window.backend.load(onSuccess, window.utils.onError);
 })();
