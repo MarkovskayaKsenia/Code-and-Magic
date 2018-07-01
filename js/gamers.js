@@ -1,40 +1,63 @@
 'use strict';
 
 (function () {
-  // Шаблон для волшебников
-  var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-    .content
-    .querySelector('.setup-similar-item');
+  var wizards = [];
+  var coatColor;
+  var eyesColor;
+  var fireballColor;
 
-  // Функция отрисовки волшебников
-  var renderWizard = function (wizard) {
-    var wizardElement = similarWizardTemplate.cloneNode(true);
-    wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
-
-    return wizardElement;
-  };
-
-  window.backend.load(function (wizards) {
-    var NUMBER_OF_WIZARDS = 4;
-
-    // Находим место для списка волшебников
-    var similarWizardList = document.querySelector('.setup-similar-list');
-
-    // Создаем фрагмент, в который поместим волшебников
-    var fragment = document.createDocumentFragment();
-
-    // Цикл для отрисовки волшебников
-    for (var i = 0; i < NUMBER_OF_WIZARDS; i++) {
-      fragment.appendChild(renderWizard(window.utils.getRandomFromArray(wizards)));
+  var getRank = function (wizard) {
+    var rank = 0;
+    if (wizard.colorCoat === coatColor) {
+      rank += 2;
     }
 
-    // Добавляем волшебников
-    similarWizardList.appendChild(fragment);
+    if (wizard.colorEyes === eyesColor) {
+      rank += 1;
+    }
 
-    // Находим и показываем окно с волшебниками
-    var similarWizardsWindow = document.querySelector('.setup-similar');
-    similarWizardsWindow.classList.remove('hidden');
-  }, window.utils.onError);
+    if (wizard.colorFireball === fireballColor) {
+      rank += 1;
+    }
+    return rank;
+  };
+  var namesSort = function (left, right) {
+    if (left > right) {
+      return 1;
+    } else if (left < right) {
+      return -1;
+    } else {
+      return 0;
+    }
+  };
+  var updateWizards = function () {
+    window.render(wizards.sort(function (left, right) {
+      var rankDiff = getRank(right) - getRank(left);
+      if (rankDiff === 0) {
+        rankDiff = namesSort(left.name, right.name);
+      }
+      return rankDiff;
+    }));
+  };
+
+  window.player = {
+    onEyesChange: function (color) {
+      eyesColor = color;
+      window.debounce(updateWizards);
+    },
+    onCoatChange: function (color) {
+      coatColor = color;
+      window.debounce(updateWizards);
+
+    },
+    onFireballChange: function (color) {
+      fireballColor = color;
+      window.debounce(updateWizards);
+    }
+  };
+
+  window.onSuccess = function (data) {
+    wizards = data;
+    window.render(wizards);
+  };
 })();
