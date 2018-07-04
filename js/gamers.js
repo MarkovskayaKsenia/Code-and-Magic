@@ -11,11 +11,9 @@
     if (wizard.colorCoat === coatColor) {
       rank += 2;
     }
-
     if (wizard.colorEyes === eyesColor) {
       rank += 1;
     }
-
     if (wizard.colorFireball === fireballColor) {
       rank += 1;
     }
@@ -26,9 +24,8 @@
       return 1;
     } else if (left < right) {
       return -1;
-    } else {
-      return 0;
     }
+    return 0;
   };
   var updateWizards = function () {
     window.render(wizards.sort(function (left, right) {
@@ -55,7 +52,6 @@
       window.debounce(updateWizards);
     }
   };
-
   window.onSuccess = function (data) {
     wizards = data;
     window.render(wizards);
